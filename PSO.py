@@ -48,7 +48,7 @@ class PSOTrainer():
             sp = benchmark_class.TwoLevel(N,T,Noise)
 
         ### initialize
-        p = 10#2*N #Number of particles
+        p = 2*N#2*N #Number of particles
         AccHist = []
 
         ### main loop
@@ -60,7 +60,6 @@ class PSOTrainer():
         #v = np.random.uniform(-0.5,0.5,size = (p,N))
         x = np.random.normal(size = (p,N))
         v = np.random.normal(size = (p,N))
-        #if version = Waveless - Spin chain
         k = 0
         F = 0 #best valued fidelity
         F_all = np.zeros(p)
@@ -75,12 +74,13 @@ class PSOTrainer():
                 if delta[i] > F_all[i]:
                     F_all[i] = delta[i]
             for i in range(p):
-                for k in range(N):
-                    v[i,k] = w*v[i,k]
-                    v[i,k] += c1*random.random()*(F_all[i]-x[i,k])
-                    v[i,k] += c2*random.random()*(x_best[k]-x[i,k])
-                    x[i,k] = x[i,k]+v[i,k]
+                for j in range(N):
+                    v[i,j] = w*v[i,j]
+                    v[i,j] += c1*random.random()*(F_all[i]-x[i,j])
+                    v[i,j] += c2*random.random()*(x_best[j]-x[i,j])
+                    x[i,j] = x[i,j]+v[i,j]
             x = MaxFunc(x,p,N)
+
             AccHist.append(F)
             times.append(time.time()-t0)
             
