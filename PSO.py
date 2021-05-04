@@ -56,10 +56,10 @@ class PSOTrainer():
         times = []
         
         # initialize position and velocity (maybe need to change values)
-        #x = np.random.uniform(-1,1,size = (p,N))
-        #v = np.random.uniform(-0.5,0.5,size = (p,N))
-        x = np.random.normal(size = (p,N))
-        v = np.random.normal(size = (p,N))
+        x = np.random.uniform(-1,1,size = (p,N))
+        v = np.random.uniform(-0.5,0.5,size = (p,N))
+        #x = np.random.normal(size = (p,N))
+        #v = np.random.normal(size = (p,N))
         k = 0
         F = 0 #best valued fidelity
         F_all = np.zeros(p)

@@ -48,7 +48,7 @@ PSO = PSO.PSOTrainer()
 
 for i in range(maxite):
     T += 0.1
-    f_story[:,i],times[:,i] = PSO.train(N,T,w,c1,c2,L=5, Noise = noise,maxepochs=maxepochs)
+    f_story[:,i],times[:,i] = PSO.train(N,T,w,c1,c2, Noise = noise,maxepochs=maxepochs)
     Tlist.append(T)
     print(T,f_story[-1,i])
 
