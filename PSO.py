@@ -42,6 +42,7 @@ class PSOTrainer():
         theta = the update vector for the u0
         if we have data we put that in the data, but will first be implemented later, for now that is just none
         """
+        assert T>0
         if L != None:
             sp = benchmark_class.SpinChain(N,T,L,Noise)
         else:
@@ -56,23 +57,25 @@ class PSOTrainer():
         times = []
         
         # initialize position and velocity (maybe need to change values)
-        x = np.random.uniform(-1,1,size = (p,N))
-        v = np.random.uniform(-0.5,0.5,size = (p,N))
-        #x = np.random.normal(size = (p,N))
-        #v = np.random.normal(size = (p,N))
+        #x = np.random.uniform(-1,1,size = (p,N))
+        #v = np.random.uniform(-0.5,0.5,size = (p,N))
+        x = np.random.normal(size = (p,N))
+        v = np.random.normal(size = (p,N))
         k = 0
         F = 0 #best valued fidelity
         F_all = np.zeros(p)
+        #x_best = np.zeros(N)
         while k < maxepochs:
             k += 1
             delta = np.zeros(p)
             for i in range(p):
-                delta[i] = sp.roll_out(x[i,:])
+                l = sp.roll_out(x[i,:])
+                delta[i] = l
                 if delta[i] > F:
-                    F = delta[i]
+                    F = l
                     x_best = x[i,:]
-                if delta[i] > F_all[i]:
-                    F_all[i] = delta[i]
+                if l > F_all[i]:
+                    F_all[i] = l
             for i in range(p):
                 for j in range(N):
                     v[i,j] = w*v[i,j]

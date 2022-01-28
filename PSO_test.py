@@ -11,9 +11,9 @@ import numpy as np
 import PSO
 import matplotlib.pyplot as plt
 N = 20
-T = 1/30
+T = 1/3
 
-noise = 0.0 # remember noise is optional
+noise = 0 # remember noise is optional
 
 #two_level = benchmark_class.TwoLevel(N, T, noise)
 
@@ -37,8 +37,8 @@ Tlist = []
        # 0.21337512,  0.37883106, -1.        , -1.        , -1.        ,
        #-1.        , -0.90246192,  0.18700451,  0.75186756,  1.        ]) #np.random.rand
 w = 0.4
-c1 = 0.4
-c2 = 0.05
+c1 = 0.1
+c2 = 0.3
 maxite = 40
 maxepochs = 50
 f_story = np.zeros((maxepochs,maxite))
@@ -49,6 +49,7 @@ PSO = PSO.PSOTrainer()
 for i in range(maxite):
     T += 0.1
     f_story[:,i],times[:,i] = PSO.train(N,T,w,c1,c2, Noise = noise,maxepochs=maxepochs)
+        
     Tlist.append(T)
     print(T,f_story[-1,i])
 
